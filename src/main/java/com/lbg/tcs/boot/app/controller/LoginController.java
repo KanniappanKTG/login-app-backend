@@ -2,6 +2,7 @@ package com.lbg.tcs.boot.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ public class LoginController {
 	@Autowired
 	private AuthDataDAO authDao;
 
-	@PostMapping(path = "/", consumes = "application/json")
+	@PostMapping(path = "/validate", consumes = "application/json")
 	public AuthStatus addEmployee(@RequestBody AuthDetails details) {
 		AuthDetails authData = authDao.getAuthDetailsByID(details.getUserID());
 
@@ -34,5 +35,10 @@ public class LoginController {
 		else
 			resp.setStatus("Failed");
 		return resp;
+	}
+	
+	@GetMapping(path = "/test")
+	public String helloMethod() {
+		return "hello world";
 	}
 }
